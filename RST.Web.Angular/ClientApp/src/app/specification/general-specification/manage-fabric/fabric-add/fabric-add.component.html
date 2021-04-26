@@ -1,0 +1,66 @@
+<div class="card">
+    <div class="card-header">
+        {{pageTitle}}
+    </div>
+    <div class="card-body">
+        <form novalidate
+              (ngSubmit)="onSubmit()"
+              [formGroup]="form">
+            <fieldset>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="fabricName">Fabric Name</label>
+                        <input maxlength="20"
+                               [ngClass]="{ 'is-invalid': submitted && f.fabricName.errors }"
+                               class="form-control form-control-sm"
+                               id="fabricName"
+                               type="text"
+                               formControlName="fabricName" />
+                        <div *ngIf="submitted && f.fabricName.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.fabricName.errors.required">Fabric name is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="description">Description</label>
+                        <textarea maxlength="200"
+                                  [ngClass]="{ 'is-invalid': submitted && f.description.errors }"
+                                  class="form-control form-control-sm"
+                                  id="description"
+                                  type="textarea"
+                                  rows="3"
+                                  formControlName="description"></textarea>
+                        <div *ngIf="submitted && f.description.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.description.errors.required">Description is required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer"
+                     style="margin-top: 10px;">
+                    <div class="form-row"
+                         style="float:right">
+                        <span>
+                            <button class="btn btn-primary btn-sm btn-custom"
+                                    type="submit">
+                                Save
+                            </button>
+                        </span>
+                        <span>
+                            <button class="btn btn-light btn-sm btn-custom"
+                                    type="button"
+                                    (click)="onCancel()">
+                                Cancel
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

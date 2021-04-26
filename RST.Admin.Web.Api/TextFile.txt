@@ -1,0 +1,28 @@
+﻿//1. Domain name :- motoiz.in
+//Hostname:- 103.152.79.85
+//username:- moto1
+//paswword:- Da^(k(16
+
+
+//2.Domain name :- frontend.motoiz.in
+//Hostname:- 103.152.79.85
+//username :- Frontenad1
+//Password:- Ga!L926!
+
+
+//3.Domain name:- backend.motoiz.in
+//Hostname:- 103.152.79.85
+//Username:- backend1
+//Password:- A3#c!oP4#p
+
+
+//4.Domain name :- backendapp.motoiz.in
+//Hostname:- 103.152.79.85
+//username:- backendapp
+//paswword:- ncna7!MpJr
+
+//5.Domain name :- content.motoiz.in
+//Hostname:- 103.152.79.85
+//username:- content
+//paswword:- N+yTY9uCe7
+

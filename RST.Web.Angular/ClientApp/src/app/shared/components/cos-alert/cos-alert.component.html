@@ -1,0 +1,9 @@
+<div class="row" *ngIf="alert">
+    <div class="col-md-12">            
+      <alert type="{{cssClass()}}" [dismissible]="true" (onClosed) = "onClosed()" [isOpen] = "isOpen">
+          <h4 class="alert-heading">{{getTitle()}}</h4>   
+          <span [innerHtml]="alert.message"></span>       
+          
+        </alert> 
+    </div>
+</div>

@@ -1,0 +1,35 @@
+diff a/CosWebProjects/Cos.BCS/Main/Applications/Cos.BCS.Infrastructure/Repository/ExtenssionMethods.cs b/CosWebProjects/Cos.BCS/Main/Applications/Cos.BCS.Infrastructure/Repository/ExtenssionMethods.cs	(rejected hunks)
+@@ -30,7 +30,33 @@
+             return data;
+ 
+         }
++        public static Nullable<T> ExtractAndCastToNull<T>(this IDataReader dr, string fieldName) where T : struct
++        {
++           
++            try
++            {
++                object columnValue = dr[fieldName];
++
++                if (!(columnValue is DBNull))
++                    return (T)columnValue;
+ 
++               
++                
++            }
++            catch (Exception ex)
++            {
++                throw new Exception($"Error has occured in Extract and Cast Data from DataReader field name: {fieldName ?? ""}", ex);
++            }
++            return null;
++
++        }
++
++        public static decimal? DecimalZeroToNull(this decimal? item)
++        {
++            if (item.HasValue && item.Value == 0)
++                return null;
++            return item;
++        }
+         public static IDataReader SafeExecuteReader(this IDbCommand cmd)
+         {
+             IDataReader reader = null; 

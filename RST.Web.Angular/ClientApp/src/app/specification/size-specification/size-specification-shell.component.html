@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-12">
+    <tabset #tabset>
+      <tab id="tabMeasureDimensionList"
+           heading="Measure Dimension"
+           (selectTab)="manageTabs('MDL')">
+        <app-measure-dimension-list *ngIf="tabsList.tabMeasureDimensionList"></app-measure-dimension-list>
+      </tab>
+      <tab id="tabSizeTypeList"
+      heading="Size Type"
+      (selectTab)="manageTabs('STL')">
+   <app-size-type-list *ngIf="tabsList.tabSizeTypeList"></app-size-type-list>
+ </tab>
+    </tabset>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+<div class="card">
+    <div class="card-header">
+        {{pageTitle}}
+    </div>
+    <div class="card-body">
+        <form novalidate
+              (ngSubmit)="onSubmit()"
+              [formGroup]="form">
+            <fieldset>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="countryId">Country</label>
+                        <ng-select [items]="countries"
+                                   bindLabel="countryName"
+                                   bindValue="rowId"
+                                   [addTag]="false"
+                                   (change)="onCountryChange($event)"
+                                   formControlName="countryId"
+                                   [ngClass]="{ 'is-invalid': submitted && f.countryId.errors }">
+                        </ng-select>
+
+                        <div *ngIf="submitted && f.countryId.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.countryId.errors.required">Country is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="stateId">State</label>
+                        <ng-select [items]="states"
+                                   bindLabel="stateName"
+                                   bindValue="rowId"
+                                   [addTag]="false"
+                                   formControlName="stateId"
+                                   [ngClass]="{ 'is-invalid': submitted && f.stateId.errors }">
+                        </ng-select>
+
+                        <div *ngIf="submitted && f.stateId.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.stateId.errors.required">State is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="cityNameId">City Name</label>
+                        <input [ngClass]="{ 'is-invalid': submitted && f.cityName.errors }"
+                               class="form-control form-control-sm"
+                               id="cityNameId"
+                               type="text"
+                               placeholder=""
+                               maxlength="50"
+                               formControlName="cityName" />
+                        <div *ngIf="submitted && f.cityName.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.cityName.errors.required">City is required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer"
+                     style="margin-top: 10px;">
+                    <div class="form-row"
+                         style="float:right">
+                        <span>
+                            <button class="btn btn-primary btn-sm btn-custom"
+                                    type="submit">
+                                Save
+                            </button>
+                        </span>
+                        <span>
+                            <button class="btn btn-light btn-sm btn-custom"
+                                    type="button"
+                                    (click)="onCancel()">
+                                Cancel
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-12">
+    <tabset #tabset>
+      <tab id="tabFormList"
+           heading="Forms List"
+           (selectTab)="manageTabs('FL')">
+        <form-list *ngIf="tabsList.tabFormList"
+                   (onAdd)="manageTabs('FA')"></form-list>
+      </tab>
+      <tab id="tabFormAdd"
+           heading="Build Form"
+           (selectTab)="manageTabs('FA')">
+        <build-form *ngIf="tabsList.tabFormAdd"
+                    (onSuccess)="manageTabs('FL')"></build-form>
+      </tab>
+      <tab id="tabFormDemo"
+           heading="Form Demo"
+           (selectTab)="manageTabs('FD')">
+        <forms-demo *ngIf="tabsList.tabFormDemo"></forms-demo>
+      </tab>
+    </tabset>
+  </div>
+</div>

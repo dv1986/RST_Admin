@@ -1,0 +1,129 @@
+<div class="container" style="height:700px;">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>
+        <strong>Cos BCS</strong>
+      </h1>
+    </div>
+  </div>
+  <div class="vertical-menu" *ngFor="let menu of (RootMenu)">
+    <a (href)='false' (mouseenter)="OnHover($event,menu)" (mouseleave)="OnAway($event,menu)">{{menu.text}}<span style="float:right">&#8250;</span></a>
+    <div class="dropdown-content" *ngIf="menu.active==true">
+      <a title="{{module.description}}"  *ngFor="let module of (Modules)" (href)='false' routerLink="/{{module.path}}" >{{module.name}}</a>
+    </div>
+  </div>
+  <!--<div class="row">
+    <div class="col-sm-4">
+      <a (href)='false' [routerLink]="['/BidPricing']" class="tile purple">
+        <h3 class="title">Bid Pricing</h3>
+        <p>Module for managing bids, submitted stocks, and submitted prices.</p>
+      </a>
+    </div>
+    <div class="col-sm-4">
+      <a (href)='false' [routerLink]="['/bin-management']" class="tile green">
+        <h3 class="title">Bin Management</h3>
+        <p>Module for Bin data management, Space optimization and management.</p>
+      </a>
+    </div>
+  
+    <div class="col-sm-4">
+      <a (href)='false' [routerLink]="['/order-entry-new']" class="tile orange">
+        <h3 class="title">Order Entry [NEW]</h3>
+        <p>Module for Creating New Orders, Updating Existing and to Manage Returns</p>
+      </a>
+    </div>
+    <div class="col-sm-4">
+      <a (href)='false' [routerLink]="['/driver-management']" class="tile green">
+        <h3 class="title">Driver Management</h3>
+        <p>Module to Search for drivers and print vouchers</p>
+      </a>
+    </div>
+    <div class="col-sm-4">
+      <a (href)='false' [routerLink]="['/contract-management']" class="tile red">
+        <h3 class="title">Contract Management [BETA]</h3>
+        <p>Module For Contract and parent management</p>
+      </a>
+    </div>
+
+    <div class="col-sm-4">
+      <a (href)='false' [routerLink]="['/agreed-cost']" class="tile blue">
+        <h3 class="title">Agreed Cost</h3>
+        <p>Module to manage agreed cost</p>
+      </a>
+    </div>
+    <div class="col-sm-4">
+      <a (href)='false' [routerLink]="['/discontinued-product']" class="tile blue">
+        <h3 class="title">Discontinued Products</h3>
+        <p>Module for discontinued products</p>
+      </a>
+    </div>
+
+    <div class="col-sm-4">
+      <a (href)='false' [routerLink]="['/rep-budget']" class="tile blue">
+        <h3 class="title">Rep Budget</h3>
+        <p>Module Rep budget</p>
+      </a>
+    </div>
+    <div class="col-sm-4">
+      <a (href)='false' [routerLink]="['/order-staging']" class="tile purple">
+        <h3 class="title">Order Staging</h3>
+        <p>Module Order Staging</p>
+      </a>
+    </div>
+
+    <div class="col-sm-4">
+      <a (href)='false' [routerLink]="['/tech-isle']" class="tile green">
+        <h3 class="title">Tech Isle</h3>
+        <p>Module for Tech Isle</p>
+      </a>
+    </div>
+    <div class="col-sm-4">
+      <a (href)='false' [routerLink]="['/bts-pack']" class="tile red">
+        <h3 class="title">Bts Pack</h3>
+        <p>Module for Bts Pack</p>
+      </a>
+    </div>
+    <div class="col-sm-4">
+      <a (href)='false' [routerLink]="['/procurement']" class="tile blue">
+        <h3 class="title">Procurement</h3>
+        <p>Module for Procurement process.</p>
+      </a>
+    </div>
+    <div class="col-sm-4">
+      <a (href)='false' [routerLink]="['/category-management']" class="tile purple">
+        <h3 class="title">Category Management</h3>
+        <p>
+          Module for Category Performance
+          Certification and Brand Management.
+
+        </p>
+      </a>
+    </div>
+    <div class="col-sm-4">
+      <a (href)='false' [routerLink]="['/demo-module']" class="tile purple">
+        <h3 class="title">Demo Module</h3>
+        <p>
+          This module is for new innocations.
+        </p>
+      </a>
+    </div>
+    <div class="col-sm-4">
+      <a (href)='false' [routerLink]="['/cosnet']" class="tile blue">
+        <h3 class="title">Cosnet</h3>
+        <p>
+          COSnet Module
+        </p>
+      </a>
+    </div>
+    
+    <div class="col-sm-4">
+      <a (href)='false' [routerLink]="['/retention']" class="tile purple">
+        <h3 class="title">Sales Management</h3>
+        <p>
+          Sales Management Module
+        </p>
+      </a>
+    </div>
+  </div>-->
+  
+</div>

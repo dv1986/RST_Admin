@@ -1,0 +1,39 @@
+
+
+<div class="row">
+    <div class="col-md-12">
+        <tabset #tabset>
+            <tab id="tabUser"
+                 heading="Grid Demo">
+                 <div class="example-wrapper">
+                    <div class="panel panel-default panel-resizable"
+                         style="height: 500px">
+                        <div class="panel-body"
+                             style="height: 92%;">
+                            <app-ag-grid [data]="users"
+                                         [gridInfo]="gridInformation"
+                                         [selectMode]="'multiple'"
+                                         [options]="gridOptions"
+                                         [rowHeight]="25"
+                                         [keyField]="'rowId'"
+                                         [gridActions]="gridActions"
+                                         [filterComponent]="filterComponent"
+                                         (ready)="onGridReady()"
+                                         (selectionChange)="onSelectionChanged($event)">
+                            </app-ag-grid>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+            <tab id="tab2"
+                 heading="Tab3">
+            </tab>
+            <tab id="tab3"
+                 heading="Tab 3">
+            </tab>
+            <tab id="tab4"
+                 heading="Tab 4">
+            </tab>
+        </tabset>
+    </div>
+</div>

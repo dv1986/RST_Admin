@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-md-12">
+    <tabset #tabset>
+      <tab id="tabCategoryList"
+           heading="Parent Category"
+           (selectTab)="manageTabs('PC')">
+        <parent-category-list *ngIf="tabsList.tabParentCategoryList"></parent-category-list>
+      </tab>
+      <tab id="tabCategoryList"
+           heading="Category"
+           (selectTab)="manageTabs('CL')">
+        <app-category-list *ngIf="tabsList.tabCategoryList"></app-category-list>
+      </tab>
+      <tab id="tabSubCategoryList"
+           heading="Parent Sub-Category"
+           (selectTab)="manageTabs('PSCL')">
+        <app-parent-subcategory-list *ngIf="tabsList.tabParentSubCategoryList"></app-parent-subcategory-list>
+      </tab>
+      <tab id="tabSubCategoryList"
+           heading="Sub-Category"
+           (selectTab)="manageTabs('SCL')">
+        <app-subcategory-list *ngIf="tabsList.tabSubCategoryList"></app-subcategory-list>
+      </tab>
+      <tab id="tabProductType"
+           heading="Product Type"
+           (selectTab)="manageTabs('TL')">
+        <app-product-type-list *ngIf="tabsList.tabProductType"></app-product-type-list>
+      </tab>
+      <tab id="tabBrandsList"
+           heading="Brands"
+           (selectTab)="manageTabs('BL')">
+        <app-brand-list *ngIf="tabsList.tabBrandsList"></app-brand-list>
+      </tab>
+    </tabset>
+  </div>
+</div>

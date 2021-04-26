@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col-md-12">
+        <tabset #tabset>
+            <tab id="tabRecordList"
+                 (selectTab)="manageTabs('L')"
+                 heading="Templates Management">
+                <!-- <app-email-template-list *ngIf="tabsList.tabRecordList" (onAdd)="manageTabs('A')"></app-email-template-list> -->
+            </tab>
+            <tab id="tabAddNew"
+                 heading="Add New"
+                 (selectTab)="manageTabs('A')">
+                 <app-email-template-add  *ngIf="tabsList.tabAddNew" (onSuccess)="manageTabs('L')"></app-email-template-add>
+            </tab>
+        </tabset>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="card">
+    <div class="card-header">
+        {{pageTitle}}
+    </div>
+    <div class="card-body">
+        <form novalidate
+              (ngSubmit)="onSubmit()">
+            <fieldset>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="includeInTopMenu">
+                            Upload File
+                        </label>
+                        <div>
+                            <app-file-upload [fileExt]="'jpg, png'" [maxFiles]="'1'" (onFileUpload)="handleFileInput($event)" ></app-file-upload>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer"
+                     style="margin-top: 10px;">
+                    <div class="form-row"
+                         style="float:right">
+                        <span>
+                            <button class="btn btn-primary btn-sm btn-custom"
+                                    type="submit">
+                                Save
+                            </button>
+                        </span>
+                        <span>
+                            <button class="btn btn-light btn-sm btn-custom"
+                                    type="button"
+                                    (click)="onCancel()">
+                                Cancel
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

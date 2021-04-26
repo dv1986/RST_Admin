@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-12">
+    <tabset #tabset>
+      <tab id="tabCategoryAttributeMappingList"
+           heading="Category Attribute Mapping"
+           (selectTab)="manageTabs('CAML')">
+        <app-category-attribute-mapping-list *ngIf="tabsList.tabCategoryAttributeMappingList">
+        </app-category-attribute-mapping-list>
+      </tab>
+      <tab id="tabProductAttributeParentList"
+           heading="Product Attribute Parent"
+           (selectTab)="manageTabs('PAPL')">
+        <app-product-attribute-parent-list *ngIf="tabsList.tabProductAttributeParentList">
+        </app-product-attribute-parent-list>
+      </tab>
+      <tab id="tabProductAttributeList"
+           heading="Product Attribute"
+           (selectTab)="manageTabs('PAL')">
+        <app-product-attribute-list *ngIf="tabsList.tabProductAttributeList"></app-product-attribute-list>
+      </tab>
+    </tabset>
+  </div>
+</div>

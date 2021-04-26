@@ -1,0 +1,11 @@
+
+1. 404-File-or-directory-not-found in Angular Application after page refresh
+http://www.techtutorhub.com/article/Angular-2-plus-Getting-404-File-or-directory-not-found-error-on-browser-refresh-URL-after-hosting/45
+
+
+2. Image Access Issue in API
+https://stackoverflow.com/questions/55487702/access-image-from-web-api-core-folder-from-browser
+
+
+
+

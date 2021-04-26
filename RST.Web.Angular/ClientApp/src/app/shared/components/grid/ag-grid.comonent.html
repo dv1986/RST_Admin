@@ -1,0 +1,170 @@
+<div style="width: 100%;height: 100%;border: 1px solid #dee2e6">
+    <div class="row gridHeader">
+        <div style="float: right!important"
+             class="col-md-12">
+            <!-- <div style="display:inline-block;padding-right: 12px;"
+                 class="dropdown navbar-right"
+                 dropdown>
+                <button class="btn btn-default btn-xs dropdown-toggle"
+                        style="margin-left:2px;margin-bottom:1px;margin-top:-2px;"
+                        type="button"
+                        id="dropdownMenu1"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="true"
+                        dropdownToggle>
+                    &#x21ba; Undo
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right "
+                    aria-labelledby="dropdownMenu1"
+                    *dropdownMenu>
+                    <li *ngFor="let history of undoHistory">
+                        <a (mouseenter)="onUndoHover($event)"
+                           id="{{history.id}}"
+                           (click)="onUndoClick($event)"
+                           href="javascript:void(0)">{{history.label}}: {{history.oldValue}} &#x2192;
+                            {{history.newValue}}</a>
+                    </li>
+                </ul>
+            </div> -->
+            <ng-container *ngIf="gridActions">
+                <span style="display:inline-block; float:right !important;"
+                      *ngFor="let action of (gridActions)">
+                    <ng-container *ngIf="action">
+                        <span
+                              *ngIf="!action.requiresConfirmation && (action.actionType==null || action.actionType=='button')">
+                            <button [disabled]="action.isDisabled"
+                                    class="{{action.cssClass}}"
+                                    [ngStyle]="action.style"
+                                    style="margin-left:1px;
+                                    margin-bottom:1px;
+                                    margin-top:-3px;
+                                    font-size: 13px;
+                                    padding: 1px 5px;
+                                    line-height: 1.5;
+                                    border-radius: 3px;"
+                                    (click)="action.onClick($event,this.options.context)">{{action.title}}</button>
+                        </span>
+                        <span *ngIf="!action.requiresConfirmation && action.actionType=='moduleLaunch'">
+                            <app-win-module-launch-button [css-class]="action.cssClass"
+                                                          [title]="action.title"
+                                                          [module-name]="action.moduleName"
+                                                          [params]="action.params">
+                            </app-win-module-launch-button>
+                        </span>
+                        <span *ngIf="!action.requiresConfirmation && action.actionType=='routerLink'">
+                            <a href="#"
+                               [routerLink]="[action.link]"
+                               (click)="action.onClick($event,this.options.context)"
+                               class="{{action.cssClass}}"
+                               style="margin-left:1px;
+                                    margin-bottom:1px;
+                                    margin-top:-3px;
+                                    font-size: 13px;
+                                    padding: 1px 5px;
+                                    line-height: 1.5;
+                                    border-radius: 3px;">{{action.title}}</a>
+                        </span>
+                        <span *ngIf="!action.requiresConfirmation && action.actionType=='dropdown'">
+                            <select class="form-control ng-CustomControl {{action.cssClass}}"
+                                    [(ngModel)]="action.modelObject[action.model]"
+                                    [ngStyle]="action.style"
+                                    (change)="action.onChange($event,this.options.context)">
+                                <option *ngFor="let option of (action.options)">{{option}}</option>
+                            </select>
+                        </span>
+                        <span *ngIf="!action.requiresConfirmation && action.actionType=='text'">
+                            <input type="text"
+                                   [ngStyle]="action.style"
+                                   [(ngModel)]="action.modelObject[action.model]"
+                                   class="form-control  {{action.cssClass}}"
+                                   placeholder="{{action.placeHolder}}"
+                                   value="{{action.title}}"
+                                   (change)="action.onChange($event,this.options.context)" />
+                        </span>
+                        <span *ngIf="!action.requiresConfirmation && action.actionType=='label'">
+                            <label [ngStyle]="action.style"
+                                   class="{{action.cssClass}}">{{action.title}}</label>
+                        </span>
+                        <span *ngIf="action.requiresConfirmation">
+                            <button style="margin-left:1px;
+                            margin-bottom:1px;
+                            margin-top:-3px;
+                            font-size: 13px;
+                            padding: 1px 5px;
+                            line-height: 1.5;
+                            border-radius: 3px;"
+                                    class="{{action.cssClass}}"
+                                    [disabled]="action.isDisabled"
+                                    mwlConfirmationPopover
+                                    [popoverTitle]="action.confirmationTitle"
+                                    [popoverMessage]="action.confirmationMessage"
+                                    placement="{{action.confirmationPlacement}}"
+                                    (confirm)="action.confirmationYesAction($event,this.options.context)"
+                                    (cancel)="action.confirmationNoAction($event,this.options.context)">
+                                {{action.title}}
+                            </button>
+                        </span>
+                    </ng-container>
+                </span>
+            </ng-container>
+            <span class="{{filterButtonClass}}"
+                  style="display:inline-block;float:right !important;"
+                  *ngIf="filterComponent!=null">
+                <button class="btn btn-info btn-sm"
+                        style="margin-left:1px;
+                                margin-bottom:1px;
+                                margin-top:-3px;
+                                font-size: 13px;
+                                padding: 1px 5px;
+                                line-height: 1.5;
+                                border-radius: 3px;"
+                        (click)="toggleFilter();"><span class="glyphicon glyphicon-filter"></span> {{filterButtonText}}
+                    &nbsp;<span class="caret"></span></button>
+            </span>
+
+        </div>
+
+    </div>
+    <div class="gridFilter" style="padding-right: 0px !important;">
+        <div *ngIf="filterComponent!=null && showFilter" style="margin-top:3px;margin-bottom:3px;">
+            <app-grid-filters [filterComponent]="filterComponent"></app-grid-filters>
+        </div>
+    </div>
+    <ag-grid-angular #agGrid
+                     style="width: 100%;height: 95%;"
+                     class="ag-theme-alpine"
+                     [gridOptions]="options"
+                     [enableColResize]="allowColumnResize"
+                     [pagination]="allowPaging"
+                     [paginationPageSize]="pagingSize"
+                     [rowData]="data"
+                     [columnDefs]="columns"
+                     [cacheBlockSize]="cacheBlockSize"
+                     [enterMovesDownAfterEdit]="true"
+                     [maxConcurrentDatasourceRequests]="1"
+                     [suppressCopyRowsToClipboard]="true"
+                     [maxBlocksInCache]="'2'"
+                     [debug]="false"
+                     [masterDetail]="true"
+                     [enableRangeSelection]="true"
+                     [rowHeight]="rowHeight"
+                     [rowSelection]="selectMode"
+                     [defaultColDef]="defaultColDef"
+                     (cellValueChanged)="onCellValueChanged($event)"
+                     (rowDoubleClicked)="onRowDblClick($event)"
+                     (viewportChanged)="onViewportChanged($event)"
+                     (bodyScroll)="onBodyScroll($event)"
+                     (selectionChanged)="onSelectionChanged($event)"
+                     (columnVisible)="onColumnVisible($event)"
+                     (columnPinned)="onColumnEverything($event)"
+                     (dragStopped)="onColumnEverything($event)"
+                     (columnResized)="onColumnResize($event)"
+                     (rowClicked)="onRowClick($event)"
+                     (cellEditingStarted)="oncellEditingStarted($event)"
+                     (filterChanged)="onFilterChanged($event)"
+                     (rowDataChanged)="onRowDataChanged($event)"
+                     (gridReady)="onGridReady($event)">
+    </ag-grid-angular>
+</div>

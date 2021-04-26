@@ -1,0 +1,687 @@
+<div class="card">
+    <div class="card-header">
+        {{pageTitle}}
+    </div>
+    <div class="card-body">
+        <form novalidate
+              (ngSubmit)="onSubmit()"
+              [formGroup]="form">
+            <fieldset>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="categoryParentId">Select Parent Category</label>
+                        <ng-select [items]="parentCategories"
+                                   bindLabel="catParentName"
+                                   bindValue="rowId"
+                                   (change)="onCategoryParentChange($event)"
+                                   [addTag]="false"
+                                   [ngClass]="{ 'is-invalid': submitted && f.categoryParentId.errors }"
+                                   formControlName="categoryParentId">
+                        </ng-select>
+                        <div *ngIf="submitted && f.categoryParentId.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.categoryParentId.errors.required">Parent Category is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="categoryId">Select Category</label>
+                        <ng-select [items]="categories"
+                                   bindLabel="catName"
+                                   bindValue="rowId"
+                                   (change)="onCategoryChange($event)"
+                                   [addTag]="false"
+                                   [ngClass]="{ 'is-invalid': submitted && f.categoryId.errors }"
+                                   formControlName="categoryId">
+                        </ng-select>
+                        <div *ngIf="submitted && f.categoryId.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.categoryId.errors.required">Category is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="subCategoryParentId">Select Parent Sub-Category</label>
+                        <ng-select [items]="subParentCategories"
+                                   bindLabel="catName"
+                                   (change)="onSubCategoryParentChange($event)"
+                                   bindValue="rowId"
+                                   [addTag]="false"
+                                   [ngClass]="{ 'is-invalid': submitted && f.subCategoryParentId.errors }"
+                                   formControlName="subCategoryParentId">
+                        </ng-select>
+                        <!-- <div *ngIf="submitted && f.subCategoryParentId.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.subCategoryParentId.errors.required">Parent Sub-Category is required</div>
+                        </div> -->
+                    </div>
+                </div>
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="subCategoryId">Select Sub Category</label>
+                        <ng-select [items]="subCategories"
+                                   bindLabel="subCategoryName"
+                                   bindValue="rowId"
+                                   [addTag]="false"
+                                   [ngClass]="{ 'is-invalid': submitted && f.subCategoryId.errors }"
+                                   (change)="onSubCategoryChange($event)"
+                                   formControlName="subCategoryId">
+                        </ng-select>
+                        <!-- <div *ngIf="submitted && f.subCategoryId.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.subCategoryId.errors.required">Sub-Category is required</div>
+                        </div> -->
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="productTypeId">Product Type</label>
+                        <ng-select [items]="productTypes"
+                                   bindLabel="name"
+                                   bindValue="rowId"
+                                   [addTag]="false"
+                                   (change)="onProductTypeChange($event)"
+                                   [ngClass]="{ 'is-invalid': submitted && f.productTypeId.errors }"
+                                   formControlName="productTypeId">
+                        </ng-select>
+                        <!-- <div *ngIf="submitted && f.productTypeId.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.productTypeId.errors.required">Product Type is required</div>
+                        </div> -->
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="brandId">Select Brand</label>
+                        <ng-select [items]="brands"
+                                   bindLabel="shortName"
+                                   bindValue="rowId"
+                                   [addTag]="false"
+                                   [ngClass]="{ 'is-invalid': submitted && f.brandId.errors }"
+                                   formControlName="brandId">
+                            <ng-template ng-option-tmp
+                                         let-item="item">
+                                <div style="height: fit-content;">
+                                    <div>
+                                        {{item.shortName}}
+                                    </div>
+                                    <small><b>Full Name: </b> {{item.fullName}}</small>
+                                </div>
+                            </ng-template>
+                        </ng-select>
+                        <!-- <div *ngIf="submitted && f.brandId.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.brandId.errors.required">Brand is required</div>
+                        </div> -->
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="productTitle">Product Title</label>
+                        <input maxlength="50"
+                               [ngClass]="{ 'is-invalid': submitted && f.productTitle.errors }"
+                               class="form-control form-control-sm"
+                               id="productTitle"
+                               type="text"
+                               formControlName="productTitle" />
+                        <div *ngIf="submitted && f.productTitle.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.productTitle.errors.required">Product title is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="skuCode">SKU Code</label>
+                        <input maxlength="20"
+                               [ngClass]="{ 'is-invalid': submitted && f.skuCode.errors }"
+                               class="form-control form-control-sm"
+                               id="skuCode"
+                               type="text"
+                               formControlName="skuCode" />
+                        <div *ngIf="submitted && f.skuCode.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.skuCode.errors.required">SKU Code is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="productTagId">Product Tag</label>
+                        <ng-select [items]="tags"
+                                   bindLabel="name"
+                                   bindValue="rowId"
+                                   [addTag]="false"
+                                   formControlName="productTagId">
+                        </ng-select>
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="modelNumber">Model Number</label>
+                        <input maxlength="10"
+                               [ngClass]="{ 'is-invalid': submitted && f.modelNumber.errors }"
+                               class="form-control form-control-sm"
+                               id="modelNumber"
+                               type="text"
+                               formControlName="modelNumber" />
+                        <div *ngIf="submitted && f.modelNumber.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.modelNumber.errors.required">Model Number is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="modelYear">Model Year</label>
+                        <input maxlength="4"
+                               [ngClass]="{ 'is-invalid': submitted && f.modelYear.errors }"
+                               class="form-control form-control-sm"
+                               id="modelYear"
+                               type="number"
+                               formControlName="modelYear" />
+                        <div *ngIf="submitted && f.modelYear.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.modelYear.errors.required">Model Year is required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="shortDescription">Short Description</label>
+                        <textarea maxlength="300"
+                                  [ngClass]="{ 'is-invalid': submitted && f.shortDescription.errors }"
+                                  class="form-control form-control-sm"
+                                  id="shortDescription"
+                                  type="text"
+                                  formControlName="shortDescription"
+                                  rows="3">
+                            </textarea>
+                        <div *ngIf="submitted && f.shortDescription.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.shortDescription.errors.required">Short description is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="fullDescription">Long Description</label>
+                        <textarea maxlength="500"
+                                  class="form-control form-control-sm"
+                                  id="fullDescription"
+                                  type="text"
+                                  formControlName="fullDescription"
+                                  rows="3">
+                            </textarea>
+                    </div>
+                </div>
+
+
+                <div class="card">
+                    <div class="card-header">
+                        Attributes
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label class="col-form-label-sm lbl-custom">Select Parent Attribute</label>
+                                <ng-select [items]="parentAttributes"
+                                           bindLabel="name"
+                                           bindValue="rowId"
+                                           [addTag]="false"
+                                           (change)="onParentAttributeChange($event)">
+                                </ng-select>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="col-form-label-sm lbl-custom"
+                                       for="attributeIds">Select Attributes</label>
+                                <ng-select [items]="attributes"
+                                           bindLabel="attributeName"
+                                           [multiple]="true"
+                                           bindValue="rowId"
+                                           [addTag]="false"
+                                           formControlName="attributeIds"
+                                           [ngClass]="{ 'is-invalid': submitted && f.attributeIds.errors }">
+                                </ng-select>
+                                <!-- <div *ngIf="submitted && f.attributeIds.errors"
+                                     class="invalid-feedback">
+                                    <div *ngIf="f.attributeIds.errors.required">Attribute is required</div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        Stock
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label class="col-form-label-sm lbl-custom"
+                                       for="stockQuantity">Stock Qty</label>
+                                <input [ngClass]="{ 'is-invalid': submitted && f.stockQuantity.errors }"
+                                       class="form-control form-control-sm"
+                                       id="stockQuantity"
+                                       type="number"
+                                       formControlName="stockQuantity" />
+                                <div *ngIf="submitted && f.stockQuantity.errors"
+                                     class="invalid-feedback">
+                                    <div *ngIf="f.stockQuantity.errors.required">Stock qty is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="col-form-label-sm lbl-custom"
+                                       for="minStockQuantity">Min Stock Qty</label>
+                                <input class="form-control form-control-sm"
+                                       id="minStockQuantity"
+                                       type="number"
+                                       formControlName="minStockQuantity" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="col-form-label-sm lbl-custom"
+                                       for="orderMinimumQuantity">Order Min Qty</label>
+                                <input class="form-control form-control-sm"
+                                       id="orderMinimumQuantity"
+                                       type="number"
+                                       formControlName="orderMinimumQuantity" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="col-form-label-sm lbl-custom"
+                                       for="orderMaximumQuantity">Order Max Qty</label>
+                                <input class="form-control form-control-sm"
+                                       id="orderMaximumQuantity"
+                                       type="number"
+                                       formControlName="orderMaximumQuantity" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label class="col-form-label-sm lbl-custom"
+                                       for="quantityBeforeUpdate">Qty Before Update</label>
+                                <input class="form-control form-control-sm"
+                                       id="quantityBeforeUpdate"
+                                       type="number"
+                                       formControlName="quantityBeforeUpdate" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="col-form-label-sm lbl-custom"
+                                       for="notifyAdminForQuantityBelow">Notify admin for Qty Below</label>
+                                <input class="form-control form-control-sm"
+                                       id="notifyAdminForQuantityBelow"
+                                       type="number"
+                                       formControlName="notifyAdminForQuantityBelow" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="col-form-label-sm lbl-custom"
+                                       for="allowedQuantities">Allowed Quantities</label>
+                                <input class="form-control form-control-sm"
+                                       id="allowedQuantities"
+                                       type="text"
+                                       formControlName="allowedQuantities" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        Price
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label class="col-form-label-sm lbl-custom"
+                                       for="productMRP">MRP</label>
+                                <input [ngClass]="{ 'is-invalid': submitted && f.productMRP.errors }"
+                                       class="form-control form-control-sm"
+                                       id="productMRP"
+                                       type="number"
+                                       formControlName="productMRP" />
+                                <div *ngIf="submitted && f.productMRP.errors"
+                                     class="invalid-feedback">
+                                    <div *ngIf="f.productMRP.errors.required">MRP is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label class="col-form-label-sm lbl-custom"
+                                       for="retailPrice">Retail Price</label>
+                                <input class="form-control form-control-sm"
+                                       id="retailPrice"
+                                       type="number"
+                                       formControlName="retailPrice" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label class="col-form-label-sm lbl-custom"
+                                       for="sellingPrice">Selling Price</label>
+                                <input class="form-control form-control-sm"
+                                       id="sellingPrice"
+                                       type="number"
+                                       formControlName="sellingPrice" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label class="col-form-label-sm lbl-custom"
+                                       for="specialPrice">Special Price</label>
+                                <input class="form-control form-control-sm"
+                                       id="specialPrice"
+                                       type="number"
+                                       formControlName="specialPrice" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label class="col-form-label-sm lbl-custom"
+                                       for="specialPriceStartDate">Special Price Start Date</label>
+                                <input class="form-control form-control-sm"
+                                       id="specialPriceStartDate"
+                                       type="date"
+                                       formControlName="specialPriceStartDate" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label class="col-form-label-sm lbl-custom"
+                                       for="specialPriceEndDate">Special Price End Date</label>
+                                <input class="form-control form-control-sm"
+                                       id="specialPriceEndDate"
+                                       type="date"
+                                       formControlName="specialPriceEndDate" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label class="col-form-label-sm lbl-custom"
+                                       for="comments">Comments</label>
+                                <input class="form-control form-control-sm"
+                                       id="comments"
+                                       type="text"
+                                       formControlName="comments" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           formControlName="inclusiveSalesTax"
+                                           id="inclusiveSalesTax">
+                                    <label class="col-form-label-sm lbl-custom"
+                                           for="inclusiveSalesTax">
+                                        Is Inclusive GST
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        Others
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label class="col-form-label-sm lbl-custom"
+                                       for="productFabricId">Select Product Fabric</label>
+                                <ng-select [items]="fabrics"
+                                           bindLabel="fabricName"
+                                           bindValue="rowId"
+                                           [addTag]="false"
+                                           formControlName="productFabricId">
+                                </ng-select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="col-form-label-sm lbl-custom"
+                                       for="seoContentId">Select SEO Content</label>
+                                <app-seo-lookup formControlName="seoContentId"></app-seo-lookup>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="col-form-label-sm lbl-custom"
+                                       for="colorIds">Select Colors</label>
+                                <ng-select [items]="colors"
+                                           bindLabel="colorName"
+                                           bindValue="rowId"
+                                           [addTag]="false"
+                                           [multiple]="true"
+                                           formControlName="colorIds"
+                                           [selectOnTab]="true"
+                                           class="ng-CustomControl">
+                                    <ng-template ng-option-tmp
+                                                 let-item="item">
+                                        <div style="height: fit-content;">
+                                            <div style="display: inline;">
+                                                <div [style.background]="item.colorCodeHex"
+                                                     style="border-radius: 8px; width: 16px;height: 16px;"></div>
+                                                <b> {{item.colorName}}</b>
+                                            </div>
+                                            <small><b> - {{item.colorCodeHex}}</b></small>
+                                        </div>
+                                    </ng-template>
+                                </ng-select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           formControlName="showOnHomePage"
+                                           id="showOnHomePage">
+                                    <label class="col-form-label-sm lbl-custom"
+                                           for="showOnHomePage">
+                                        Show On Home Page
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           formControlName="allowCustomerReviews"
+                                           id="allowCustomerReviews">
+                                    <label class="col-form-label-sm lbl-custom"
+                                           for="allowCustomerReviews">
+                                        Allow Customer Reviews
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           formControlName="displayStockAvailability"
+                                           id="displayStockAvailability">
+                                    <label class="col-form-label-sm lbl-custom"
+                                           for="displayStockAvailability">
+                                        Display Stock Availability
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           formControlName="displayStockQuantity"
+                                           id="displayStockQuantity">
+                                    <label class="col-form-label-sm lbl-custom"
+                                           for="displayStockQuantity">
+                                        Display Stock Quantity
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           formControlName="isOutOfStock"
+                                           id="isOutOfStock">
+                                    <label class="col-form-label-sm lbl-custom"
+                                           for="isOutOfStock">
+                                        Is Out of Stock
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           formControlName="disableBuyButton"
+                                           id="disableBuyButton">
+                                    <label class="col-form-label-sm lbl-custom"
+                                           for="disableBuyButton">
+                                        Disable Buy Button
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           formControlName="disableWishlistButton"
+                                           id="disableWishlistButton">
+                                    <label class="col-form-label-sm lbl-custom"
+                                           for="disableWishlistButton">
+                                        Disable Wishlist Button
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           formControlName="hasDiscountsApplied"
+                                           id="hasDiscountsApplied">
+                                    <label class="col-form-label-sm lbl-custom"
+                                           for="hasDiscountsApplied">
+                                        Has Discounts Applied
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           formControlName="isNew"
+                                           id="isNew">
+                                    <label class="col-form-label-sm lbl-custom"
+                                           for="isNew">
+                                        Is New
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           formControlName="published"
+                                           id="published">
+                                    <label class="col-form-label-sm lbl-custom"
+                                           for="published">
+                                        Is Published
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           formControlName="isRecommended"
+                                           id="isRecommended">
+                                    <label class="col-form-label-sm lbl-custom"
+                                           for="isRecommended">
+                                        Is Recommended
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           formControlName="isFeatured"
+                                           id="isFeatured">
+                                    <label class="col-form-label-sm lbl-custom"
+                                           for="isFeatured">
+                                        Is Featured
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        Images
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <div>
+                                    <app-file-upload [fileExt]="'jpg, png'"
+                                                     [maxFiles]="'10'"
+                                                     (onFileUpload)="handleFileInput($event)"></app-file-upload>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <div *ngFor="let url of urls;"
+                                     style="display: inline-grid;">
+                                    <img width="100px"
+                                         height="70px"
+                                         style="border: 3px solid #bbb;"
+                                         onError="this.src='assets/images/NoImage.png'"
+                                         [src]="url.ImageUrl" />
+                                    <button class="btn btn-light btn-sm"
+                                            (click)="onDeleteImage(url)"
+                                            type="button">
+                                        Remove
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="form-row">
+                            <div class="form-group col-md-12"
+                                 style="float:right">
+                                <button class="btn btn-light btn-sm"
+                                        (click)="onUploadImage()"
+                                        type="button">
+                                    Upload Images
+                                </button>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+
+                <div class="modal-footer"
+                     style="margin-top: 10px;">
+                    <div class="form-row"
+                         style="float:right">
+                        <span>
+                            <button class="btn btn-primary btn-sm btn-custom"
+                                    type="submit">
+                                Save
+                            </button>
+                        </span>
+                        <span>
+                            <button class="btn btn-light btn-sm btn-custom"
+                                    type="button"
+                                    (click)="onCancel()">
+                                Cancel
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

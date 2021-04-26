@@ -1,0 +1,375 @@
+<div class="card">
+    <div class="card-header">
+        {{pageTitle}}
+    </div>
+    <div class="card-body">
+        <form novalidate
+              (ngSubmit)="onSubmit()"
+              [formGroup]="userForm">
+            <fieldset>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="firstNameId">First Name</label>
+                        <input [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
+                               maxlength="50"
+                               class="form-control form-control-sm"
+                               id="firstNameId"
+                               type="text"
+                               placeholder="firstname"
+                               formControlName="firstName" />
+                        <div *ngIf="submitted && f.firstName.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="lastnameId">Last Name</label>
+                        <input [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }"
+                               maxlength="50"
+                               class="form-control form-control-sm"
+                               id="lastnameId"
+                               type="text"
+                               placeholder="lastname"
+                               formControlName="lastname" />
+                        <div *ngIf="submitted && f.lastname.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.lastname.errors.required">Last name is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="emailId">Email</label>
+                        <input [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                               maxlength="50"
+                               class="form-control form-control-sm"
+                               id="emailId"
+                               type="text"
+                               placeholder="email"
+                               formControlName="email" />
+                        <div *ngIf="submitted && f.email.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.email.errors.required">Email is required</div>
+                            <div *ngIf="f.email.errors.pattern">Email must be a valid email address</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="userTypeId">User Type</label>
+                        <ng-select [items]="userTypes"
+                                   [ngClass]="{ 'is-invalid': submitted && f.userTypeId.errors }"
+                                   bindLabel="userTypeName"
+                                   bindValue="rowId"
+                                   [addTag]="false"
+                                   formControlName="userTypeId"
+                                   (change)="onUserTypeChange($event)">
+                        </ng-select>
+                        <div *ngIf="submitted && f.userTypeId.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.userTypeId.errors.required">User Type is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="mobileId">Mobile</label>
+                        <input [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }"
+                               class="form-control form-control-sm"
+                               id="mobileId"
+                               type="text"
+                               placeholder="mobile"
+                               formControlName="mobile"
+                               maxlength="10" />
+                        <div *ngIf="submitted && f.mobile.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.mobile.errors.required">Mobile is required</div>
+                            <div *ngIf="f.mobile.errors.pattern">Mobile number should contains digit only!</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="phoneId">Phone</label>
+                        <input class="form-control form-control-sm"
+                               [ngClass]="{ 'is-invalid': submitted && f.phone.errors }"
+                               id="phoneId"
+                               type="text"
+                               placeholder="phone"
+                               formControlName="phone"
+                               maxlength="10" />
+                        <div *ngIf="submitted && f.phone.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.phone.errors.pattern">Mobile number should contains digit only!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="gender">Gender</label>
+                        <ng-select [items]="genders"
+                                   [ngClass]="{ 'is-invalid': submitted && f.gender.errors }"
+                                   bindLabel="text"
+                                   bindValue="id"
+                                   [addTag]="false"
+                                   formControlName="gender">
+                        </ng-select>
+                        <div *ngIf="submitted && f.gender.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.gender.errors.required">Gender is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="dateOfBirthId">DOB</label>
+                        <input [ngClass]="{ 'is-invalid': submitted && f.dateOfBirth.errors }"
+                               class="form-control form-control-sm"
+                               id="dateOfBirthId"
+                               type="date"
+                               placeholder="DOB"
+                               formControlName="dateOfBirth" />
+                        <div *ngIf="submitted && f.dateOfBirth.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.dateOfBirth.errors.required">Date Of Birth is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="subscriptionId">Subscription Type</label>
+                        <ng-select [items]="subscriptionList"
+                                   [ngClass]="{ 'is-invalid': submitted && f.subscriptionId.errors }"
+                                   bindLabel="subscriptionName"
+                                   bindValue="rowId"
+                                   [addTag]="false"
+                                   formControlName="subscriptionId">
+                        </ng-select>
+                        <div *ngIf="submitted && f.subscriptionId.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.subscriptionId.errors.required">Subscription Type is required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="garageName">Garage Name</label>
+                        <input [ngClass]="{ 'is-invalid': submitted && f.garageName.errors }"
+                               class="form-control form-control-sm"
+                               id="garageName"
+                               maxlength="50"
+                               type="text"
+                               placeholder="garageName"
+                               formControlName="garageName" />
+                        <div *ngIf="submitted && f.garageName.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.garageName.errors.required">Garage name is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="password">Password</label>
+                        <input [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                               class="form-control form-control-sm"
+                               id="password"
+                               type="password"
+                               placeholder="password"
+                               maxlength="15"
+                               formControlName="password" />
+                        <div *ngIf="submitted && f.password.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.password.errors.required">Password is required</div>
+                            <div *ngIf="f.password.errors.minLength">Please enter a password at least 6 characters</div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="confirmPassword">Confirm Password</label>
+                        <input [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }"
+                               class="form-control form-control-sm"
+                               id="confirmPassword"
+                               type="password"
+                               placeholder="Confirm Password"
+                               maxlength="15"
+                               formControlName="confirmPassword" />
+                        <div *ngIf="submitted && f.confirmPassword.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+                            <div *ngIf="f.confirmPassword.errors.minLength">Please enter a password at least 6
+                                characters</div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <br>
+
+                <div class="card">
+                    <div class="card-header">
+                        Address
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label class="col-form-label-sm lbl-custom"
+                                       for="searchAddressId">Search Address</label>
+                                <input class="form-control form-control-sm"
+                                       id="searchAddressId"
+                                       type="text"
+                                       placeholder="Search Address"
+                                       formControlName="searchAddress" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label class="col-form-label-sm lbl-custom"
+                                       for="addressline1Id">Address Line 1</label>
+                                <input [ngClass]="{ 'is-invalid': submitted && f.addressline1.errors }"
+                                       class="form-control form-control-sm"
+                                       id="addressline1Id"
+                                       type="text"
+                                       placeholder="Address Line 1"
+                                       formControlName="addressline1"
+                                       maxlength="100" />
+                                <div *ngIf="submitted && f.addressline1.errors"
+                                     class="invalid-feedback">
+                                    <div *ngIf="f.addressline1.errors.required">Address line1 is required</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label class="col-form-label-sm lbl-custom"
+                                       for="addressline2Id">Address Line 2</label>
+                                <input class="form-control form-control-sm"
+                                       id="addressline2Id"
+                                       type="text"
+                                       placeholder="Address Line 2"
+                                       formControlName="addressline2"
+                                       maxlength="100" />
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label class="col-form-label-sm lbl-custom"
+                                       for="zipcodeId">Zip Code</label>
+                                <input [ngClass]="{ 'is-invalid': submitted && f.zipcode.errors }"
+                                       class="form-control form-control-sm"
+                                       id="zipcodeId"
+                                       type="text"
+                                       placeholder="zipcode"
+                                       formControlName="zipcode"
+                                       maxlength="7" />
+                                <div *ngIf="submitted && f.zipcode.errors"
+                                     class="invalid-feedback">
+                                    <div *ngIf="f.zipcode.errors.required">Zipcode is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label class="col-form-label-sm lbl-custom"
+                                       for="countryId">Country</label>
+                                <ng-select [items]="countries"
+                                           bindLabel="countryName"
+                                           [ngClass]="{ 'is-invalid': submitted && f.countryId.errors }"
+                                           bindValue="rowId"
+                                           [addTag]="false"
+                                           (change)="onCountryChange($event)"
+                                           formControlName="countryId">
+                                </ng-select>
+                                <div *ngIf="submitted && f.countryId.errors"
+                                     class="invalid-feedback">
+                                    <div *ngIf="f.countryId.errors.required">Country is required</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label class="col-form-label-sm lbl-custom"
+                                       for="stateId">State</label>
+                                <ng-select [items]="states"
+                                           [ngClass]="{ 'is-invalid': submitted && f.stateId.errors }"
+                                           bindLabel="stateName"
+                                           bindValue="rowId"
+                                           [addTag]="false"
+                                           (change)="onStateChange($event)"
+                                           formControlName="stateId">
+                                </ng-select>
+                                <div *ngIf="submitted && f.stateId.errors"
+                                     class="invalid-feedback">
+                                    <div *ngIf="f.stateId.errors.required">State is required</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label class="col-form-label-sm lbl-custom"
+                                       for="cityId">City</label>
+                                <ng-select [items]="cities"
+                                           [ngClass]="{ 'is-invalid': submitted && f.cityId.errors }"
+                                           bindLabel="cityName"
+                                           bindValue="rowId"
+                                           [addTag]="false"
+                                           (change)="onStateChange($event)"
+                                           formControlName="cityId">
+                                </ng-select>
+                                <div *ngIf="submitted && f.cityId.errors"
+                                     class="invalid-feedback">
+                                    <div *ngIf="f.cityId.errors.required">City is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" *ngIf="isAdvertiser">
+                    <div class="card-header">
+                        Upload Advertisement
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label class="col-form-label-sm lbl-custom"
+                                       for="includeInTopMenu">
+                                    Upload File
+                                </label>
+                                <div>
+                                    <app-file-upload [fileExt]="'jpg, png'"
+                                                     [maxFiles]="'1'"
+                                                     (onFileUpload)="handleFileInput($event)"></app-file-upload>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer"
+                     style="margin-top: 10px;">
+                    <div class="form-row"
+                         style="float:right">
+                        <span>
+                            <button class="btn btn-primary btn-sm btn-custom"
+                                    type="submit">
+                                Save
+                            </button>
+                        </span>
+                        <span>
+                            <button class="btn btn-light btn-sm btn-custom"
+                                    type="button"
+                                    (click)="onCancel()">
+                                Cancel
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

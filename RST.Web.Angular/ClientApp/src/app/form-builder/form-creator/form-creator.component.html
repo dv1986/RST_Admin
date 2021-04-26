@@ -1,0 +1,219 @@
+<div class="card">
+    <div class="card-header">
+        {{options.name}}
+    </div>
+    <div class="card-body">
+        <form [formGroup]="options.dynamicForm"
+              novalidate>
+            <div class="form-row">
+                <ng-container *ngFor="let item of options.attributes">
+                    <div *ngIf="item.type=='text'"
+                         class="form-group col-md-{{item.col}}">
+                        <label class="col-form-label-sm lbl-custom">{{item.label}}</label> <label *ngIf="item.required"
+                               class="text-danger lbl-custom">*</label>
+                        <input type="{{item.type}}"
+                               [ngClass]="{ 'is-invalid': options.submitted && options.dynamicForm.controls[item.formControlName].errors }"
+                               class="form-control form-control-sm"
+                               id="{{item.name}}"
+                               placeholder="{{item.placeholder}}"
+                               formControlName="{{item.formControlName}}"
+                               autocomplete="off">
+                        <ng-container *ngFor="let validation of item.validations">
+                            <div class="invalid-feedback"
+                                 *ngIf="options.submitted && options.dynamicForm.controls[item.formControlName].errors">
+                                <div *ngIf="options.dynamicForm.controls[item.formControlName].errors[validation.name]">
+                                    {{validation.message}}
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div *ngIf="item.type=='number'"
+                         class="form-group col-md-{{item.col}}">
+                        <label class="col-form-label-sm lbl-custom">{{item.label}}</label> <label *ngIf="item.required"
+                               class="text-danger lbl-custom">*</label>
+                        <input type="{{item.type}}"
+                               [ngClass]="{ 'is-invalid': options.submitted && options.dynamicForm.controls[item.formControlName].errors }"
+                               class="form-control form-control-sm"
+                               id="{{item.name}}"
+                               min="{{item.min}}"
+                               max="{{item.max}}"
+                               placeholder="{{item.placeholder}}"
+                               formControlName="{{item.formControlName}}"
+                               autocomplete="off">
+                        <ng-container *ngFor="let validation of item.validations">
+                            <div class="invalid-feedback"
+                                 *ngIf="options.submitted && options.dynamicForm.controls[item.formControlName].errors">
+                                <div *ngIf="options.dynamicForm.controls[item.formControlName].errors[validation.name]">
+                                    {{validation.message}}
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div *ngIf="item.type=='date'"
+                         class="form-group col-md-{{item.col}}">
+                        <label class="col-form-label-sm lbl-custom">{{item.label}}</label> <label *ngIf="item.required"
+                               class="text-danger lbl-custom">*</label>
+                        <input type="{{item.type}}"
+                               [ngClass]="{ 'is-invalid': options.submitted && options.dynamicForm.controls[item.formControlName].errors }"
+                               class="form-control form-control-sm"
+                               id="{{item.name}}"
+                               placeholder="{{item.placeholder}}"
+                               formControlName="{{item.formControlName}}"
+                               autocomplete="off">
+                        <ng-container *ngFor="let validation of item.validations">
+                            <div class="invalid-feedback"
+                                 *ngIf="options.submitted && options.dynamicForm.controls[item.formControlName].errors">
+                                <div *ngIf="options.dynamicForm.controls[item.formControlName].errors[validation.name]">
+                                    {{validation.message}}
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div *ngIf="item.type=='datetime-local'"
+                         class="form-group col-md-{{item.col}}">
+                        <label class="col-form-label-sm lbl-custom">{{item.label}}</label> <label *ngIf="item.required"
+                               class="text-danger lbl-custom">*</label>
+                        <input type="{{item.type}}"
+                               [ngClass]="{ 'is-invalid': options.submitted && options.dynamicForm.controls[item.formControlName].errors }"
+                               class="form-control form-control-sm"
+                               id="{{item.name}}"
+                               placeholder="{{item.placeholder}}"
+                               formControlName="{{item.formControlName}}"
+                               autocomplete="off">
+                        <ng-container *ngFor="let validation of item.validations">
+                            <div class="invalid-feedback"
+                                 *ngIf="options.submitted && options.dynamicForm.controls[item.formControlName].errors">
+                                <div *ngIf="options.dynamicForm.controls[item.formControlName].errors[validation.name]">
+                                    {{validation.message}}
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div *ngIf="item.type=='textarea'"
+                         class="form-group col-md-{{item.col}}">
+                        <label class="col-form-label-sm lbl-custom">{{item.label}}</label> <label *ngIf="item.required"
+                               class="text-danger lbl-custom">*</label>
+                        <textarea [ngClass]="{ 'is-invalid': options.submitted && options.dynamicForm.controls[item.formControlName].errors }"
+                                  class="form-control form-control-sm"
+                                  id="{{item.name}}"
+                                  placeholder="{{item.placeholder}}"
+                                  formControlName="{{item.formControlName}}"
+                                  autocomplete="off">
+            </textarea>
+                        <ng-container *ngFor="let validation of item.validations">
+                            <div class="invalid-feedback"
+                                 *ngIf="options.submitted && options.dynamicForm.controls[item.formControlName].errors">
+                                <div *ngIf="options.dynamicForm.controls[item.formControlName].errors[validation.name]">
+                                    {{validation.message}}
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div *ngIf="item.type=='file'"
+                         class="form-group col-md-{{item.col}}">
+                        <label class="col-form-label-sm lbl-custom">{{item.label}} (File can't be uploaded right
+                            now)</label> <label *ngIf="item.required"
+                               class="text-danger lbl-custom">*</label>
+                        <!-- <input type="file"
+                               class="form-control form-control-sm"
+                               id="{{item.name}}"
+                               placeholder="{{item.placeholder}}"
+                               [(ngModel)]="item.value"
+                               [ngModelOptions]="{standalone: true}"
+                               autocomplete="off"> -->
+                        <!-- <app-file-upload [fileExt]="'jpg, png'"
+                                         [maxFiles]="'1'"
+                                         (onFileUpload)="handleFileInput($event)"></app-file-upload> -->
+                    </div>
+                    <div *ngIf="item.type=='paragraph'">
+                        <p class="form-text">{{item.placeholder}}</p>
+                    </div>
+                    <div *ngIf="item.type=='autocomplete'"
+                         class="form-group col-md-{{item.col}}">
+                        <label class="col-form-label-sm lbl-custom">{{item.label}}</label> <label *ngIf="item.required"
+                               class="text-danger lbl-custom">*</label>
+                        <ng-select [ngClass]="{ 'is-invalid': options.submitted && options.dynamicForm.controls[item.formControlName].errors }"
+                                   [items]="item.values"
+                                   bindLabel="{{item.bindLabel}}"
+                                   bindValue="{{item.bindValue}}"
+                                   [addTag]="false"
+                                   (change)="valueChanged($event,item)"
+                                   formControlName="{{item.formControlName}}">
+                        </ng-select>
+                        <ng-container *ngFor="let validation of item.validations">
+                            <div class="invalid-feedback"
+                                 *ngIf="options.submitted && options.dynamicForm.controls[item.formControlName].errors">
+                                <div *ngIf="options.dynamicForm.controls[item.formControlName].errors[validation.name]">
+                                    {{validation.message}}
+                                </div>
+                            </div>
+                        </ng-container>
+                        <!-- <select class="form-control form-control-sm"
+                    id="{{item.name}}"
+                    [(ngModel)]="item.value"
+                    [ngModelOptions]="{standalone: true}">
+                <option *ngFor="let v of item.values"
+                        [value]="v.value">{{v.label}}</option>
+            </select> -->
+                        <!-- <small class="form-text text-muted">{{item.description}}</small> -->
+                    </div>
+                    <div *ngIf="item.type=='checkbox'"
+                         class="form-group col-md-{{item.col}}">
+                        <label class="col-form-label-sm lbl-custom">{{item.label}}</label>
+                        <label *ngIf="item.required"
+                               class="text-danger lbl-custom">*</label>
+                        <div class="inline-form-group">
+                            <ng-container *ngFor="let v of item.values">
+                                <label class="cust-check-bx">
+                                    <input type="checkbox"
+                                           [value]="v.value"
+                                           formControlName="{{item.formControlName}}"> {{v.label}}
+                                    <span class="checkmark"></span>
+                                </label>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div *ngIf="item.type=='radio'"
+                         class="form-group col-md-{{item.col}}">
+                        <label class="col-form-label-sm lbl-custom">{{item.label}}</label> <label *ngIf="item.required"
+                               class="text-danger lbl-custom">*</label>
+                        <div class="inline-form-group">
+                            <ng-container *ngFor="let v of item.values">
+                                <label class="cust-check-bx"
+                                       style="margin-right: 10px;">
+                                    <input type="radio"
+                                           [value]="v.value"
+                                           formControlName="{{item.formControlName}}"> {{v.label}}
+                                    <span class="checkmark"></span>
+                                </label>
+                            </ng-container>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="modal-footer"
+                 style="margin-top: 10px;">
+                <div class="form-row float-right">
+                    <ng-container *ngFor="let item of options.attributes">
+                        <div *ngIf="item.type=='submit'"
+                             class="btn-cont">
+                            <input type="button"
+                                   value="{{item.formControlName}}"
+                                   class="btn btn-primary btn-sm btn-custom"
+                                   (click)="valueChanged($event,item)"
+                                   id="{{item.name}}">
+                        </div>
+                        <div *ngIf="item.type=='reset'"
+                             class="btn-cont">
+                            <input type="reset"
+                                   value="{{item.formControlName}}"
+                                   class="btn btn-danger btn-sm btn-custom"
+                                   id="{{item.name}}">
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

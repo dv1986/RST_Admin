@@ -1,0 +1,124 @@
+<div class="card">
+    <div class="card-header">
+        {{pageTitle}}
+    </div>
+    <div class="card-body">
+        <form novalidate
+              (ngSubmit)="onSubmit()"
+              [formGroup]="form">
+            <fieldset>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="categoryParentId">Select Parent Category</label>
+                        <ng-select [items]="parentCategories"
+                                   bindLabel="catParentName"
+                                   bindValue="rowId"
+                                   (change)="onCategoryParentChange($event)"
+                                   [addTag]="false"
+                                   [ngClass]="{ 'is-invalid': submitted && f.categoryParentId.errors }"
+                                   formControlName="categoryParentId">
+                        </ng-select>
+                        <div *ngIf="submitted && f.categoryParentId.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.categoryParentId.errors.required">Parent Category is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="categoryId">Select Category</label>
+                        <ng-select [items]="categories"
+                                   bindLabel="catName"
+                                   bindValue="rowId"
+                                   (change)="onCategoryChange($event)"
+                                   [addTag]="false"
+                                   [ngClass]="{ 'is-invalid': submitted && f.categoryId.errors }"
+                                   formControlName="categoryId">
+                        </ng-select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="subCategoryParentId">Select Parent Sub-Category</label>
+                        <ng-select [items]="subParentCategories"
+                                   bindLabel="catName"
+                                   (change)="onSubCategoryParentChange($event)"
+                                   bindValue="rowId"
+                                   [addTag]="false"
+                                   [ngClass]="{ 'is-invalid': submitted && f.subCategoryParentId.errors }"
+                                   formControlName="subCategoryParentId">
+                        </ng-select>
+                    </div>
+                    
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="subCategoryId">Select Sub Category</label>
+                        <ng-select [items]="subCategories"
+                                   bindLabel="subCategoryName"
+                                   bindValue="rowId"
+                                   [addTag]="false"
+                                   [ngClass]="{ 'is-invalid': submitted && f.subCategoryId.errors }"
+                                   (change)="onSubCategoryChange($event)"
+                                   formControlName="subCategoryId">
+                        </ng-select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="productTypeId">Product Type</label>
+                        <ng-select [items]="productTypes"
+                                   bindLabel="name"
+                                   bindValue="rowId"
+                                   [addTag]="false"
+                                   [ngClass]="{ 'is-invalid': submitted && f.productTypeId.errors }"
+                                   formControlName="productTypeId">
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="attributeIds">Select Attributes</label>
+                        <ng-select [items]="parentAttributes"
+                                   bindLabel="name"
+                                   [multiple]="true"
+                                   bindValue="rowId"
+                                   [addTag]="false"
+                                   formControlName="attributeIds"
+                                   [ngClass]="{ 'is-invalid': submitted && f.attributeIds.errors }">
+                        </ng-select>
+                        <div *ngIf="submitted && f.attributeIds.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.attributeIds.errors.required">Attribute is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer"
+                     style="margin-top: 10px;">
+                    <div class="form-row"
+                         style="float:right">
+                        <span>
+                            <button class="btn btn-primary btn-sm btn-custom"
+                                    type="submit">
+                                Save
+                            </button>
+                        </span>
+                        <span>
+                            <button class="btn btn-light btn-sm btn-custom"
+                                    type="button"
+                                    (click)="onCancel()">
+                                Cancel
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<ng-select [items]="states"
+           bindLabel="stateName"
+           bindValue="rowId"
+           [addTag]="false"
+           [multiple]="false"
+           [typeahead]="typeahead"          
+           [placeholder]="placeholder"
+           [virtualScroll] = "true"
+           [selectOnTab] = "true"
+            [disabled]="disabled"
+           appendTo = "body"
+           [(ngModel)]= "selectedState" class="ng-CustomControl">
+           <ng-template ng-option-tmp let-item="item">
+           <div>{{item.stateName}}</div>
+           <!-- <small><b>Name:</b> {{item.name}}| <b>Parent Code:</b> {{item.parentCode}} | <span *ngIf="item.abn!= ''"><b>ABN:</b> {{item.abn}}</span></small> -->
+        </ng-template>
+</ng-select>

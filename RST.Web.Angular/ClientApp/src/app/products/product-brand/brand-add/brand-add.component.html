@@ -1,0 +1,87 @@
+<div class="card">
+    <div class="card-header">
+        {{pageTitle}}
+    </div>
+    <div class="card-body">
+        <form novalidate
+              (ngSubmit)="onSubmit()"
+              [formGroup]="form">
+            <fieldset>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="shortName">Short Name</label>
+                        <input maxlength="15"
+                               [ngClass]="{ 'is-invalid': submitted && f.shortName.errors }"
+                               class="form-control form-control-sm"
+                               id="shortName"
+                               type="text"
+                               formControlName="shortName" />
+                        <div *ngIf="submitted && f.shortName.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.shortName.errors.required">Short Name is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="fullName">Full Name</label>
+                        <input maxlength="50"
+                               [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }"
+                               class="form-control form-control-sm"
+                               id="fullName"
+                               type="text"
+                               formControlName="fullName" />
+                        <div *ngIf="submitted && f.fullName.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.fullName.errors.required">Full Name is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="description">Description</label>
+                        <textarea class="form-control form-control-sm"
+                                  id="description"
+                                  type="text"
+                                  rows="3"
+                                  formControlName="description"> </textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="includeInTopMenu">
+                            Upload File
+                        </label>
+                        <div>
+                            <app-file-upload [fileExt]="'jpg, png'"
+                                             [maxFiles]="'1'"
+                                             (onFileUpload)="handleFileInput($event)"></app-file-upload>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer"
+                     style="margin-top: 10px;">
+                    <div class="form-row"
+                         style="float:right">
+                        <span>
+                            <button class="btn btn-primary btn-sm btn-custom"
+                                    type="submit">
+                                Save
+                            </button>
+                        </span>
+                        <span>
+                            <button class="btn btn-light btn-sm btn-custom"
+                                    type="button"
+                                    (click)="onCancel()">
+                                Cancel
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+<div class="card">
+    <div class="card-header">
+        {{pageTitle}}
+    </div>
+    <div class="card-body">
+        <form novalidate
+              (ngSubmit)="onSubmit()"
+              [formGroup]="form">
+            <fieldset>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="colorName">Color Name</label>
+                        <input maxlength="20"
+                               [ngClass]="{ 'is-invalid': submitted && f.colorName.errors }"
+                               class="form-control form-control-sm"
+                               id="colorName"
+                               type="text"
+                               formControlName="colorName" />
+                        <div *ngIf="submitted && f.colorName.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.colorName.errors.required">Color name is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="colorCodeRGB">Color Code RGB</label>
+                        <input maxlength="20"
+                               [ngClass]="{ 'is-invalid': submitted && f.colorCodeRGB.errors }"
+                               class="form-control form-control-sm"
+                               id="colorCodeRGB"
+                               type="text"
+                               formControlName="colorCodeRGB" />
+                        <div *ngIf="submitted && f.colorCodeRGB.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.colorCodeRGB.errors.required">Color code RGB is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="colorCodeHex">Color Code Hex</label>
+                        <input maxlength="8"
+                               [ngClass]="{ 'is-invalid': submitted && f.colorCodeHex.errors }"
+                               class="form-control form-control-sm"
+                               id="colorCodeHex"
+                               type="text"
+                               formControlName="colorCodeHex" />
+                        <div *ngIf="submitted && f.colorCodeHex.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.colorCodeHex.errors.required">Color code Hex is required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer"
+                     style="margin-top: 10px;">
+                    <div class="form-row"
+                         style="float:right">
+                        <span>
+                            <button class="btn btn-primary btn-sm btn-custom"
+                                    type="submit">
+                                Save
+                            </button>
+                        </span>
+                        <span>
+                            <button class="btn btn-light btn-sm btn-custom"
+                                    type="button"
+                                    (click)="onCancel()">
+                                Cancel
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

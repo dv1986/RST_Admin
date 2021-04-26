@@ -1,0 +1,17 @@
+<div class="example-wrapper">
+    <div class="panel panel-default panel-resizable"
+         style="height: 300px">
+        <div class="panel-body"
+             style="height: 92%;">
+            <app-ag-grid [data]="dataList"
+                         [gridInfo]="gridInformation"
+                         [selectMode]="'multiple'"
+                         [options]="gridOptions"
+                         [rowHeight]="25"
+                         [keyField]="'rowId'"
+                         [gridActions]="gridActions"
+                         (ready)="onGridReady()">
+            </app-ag-grid>
+        </div>
+    </div>
+</div>

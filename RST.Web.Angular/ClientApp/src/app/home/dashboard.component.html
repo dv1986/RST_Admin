@@ -1,0 +1,71 @@
+﻿<!-- <div class="container"
+     style="height:700px;">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>
+      </h1>
+    </div>
+  </div>
+  <div class="vertical-menu">
+    <div *ngFor="let menu of rootMenu">
+      <a (href)='false'
+         (mouseenter)="OnHover($event,menu)"
+         (mouseleave)="OnAway($event,menu)">
+        <i class="fa fa-dashboard"></i>{{menu.text}}<span style="float:right">&#8250;</span> </a>
+      <div class="dropdown-content"
+           *ngIf="menu.active==true">
+        <a title="{{module.description}}"
+           *ngFor="let module of menu.Modules"
+           (href)='false'
+           routerLink="/{{module.path}}">{{module.name}}</a>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<!-- <main class="app-content">
+  <div class="app-title">
+    <div>
+      <h1><i class="fa fa-dashboard"></i> Dashboard</h1>
+    </div>
+    <ul class="app-breadcrumb breadcrumb">
+      <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+      <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+    </ul>
+  </div>-->
+  <div class="row"> 
+    <div class="col-md-6 col-lg-3">
+      <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
+        <div class="info">
+          <h4>Users</h4>
+          <p><b>5</b></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+      <div class="widget-small info coloured-icon"><i class="icon fa fa-thumbs-o-up fa-3x"></i>
+        <div class="info">
+          <h4>Likes</h4>
+          <p><b>25</b></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+      <div class="widget-small warning coloured-icon"><i class="icon fa fa-files-o fa-3x"></i>
+        <div class="info">
+          <h4>Uploades</h4>
+          <p><b>10</b></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+      <div class="widget-small danger coloured-icon"><i class="icon fa fa-star fa-3x"></i>
+        <div class="info">
+          <h4>Stars</h4>
+          <p><b>500</b></p>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- </main> -->

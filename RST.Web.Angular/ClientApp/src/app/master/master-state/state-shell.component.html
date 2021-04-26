@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col-md-12">
+        <tabset #tabset>
+            <tab id="tabRecordList"
+                 (selectTab)="manageTabs('L')"
+                 heading="State Management">
+                <app-state-list *ngIf="tabsList.tabRecordList" (onAdd)="manageTabs('A')"></app-state-list>
+            </tab>
+            <!-- <tab id="tabAddNew"
+                 heading="Add New"
+                 (selectTab)="manageTabs('A')">
+                 <app-state-add  *ngIf="tabsList.tabAddNew" (onSuccess)="manageTabs('L')"></app-state-add>
+            </tab> -->
+        </tabset>
+    </div>
+</div>

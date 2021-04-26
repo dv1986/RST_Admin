@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col-md-12">
+        <tabset #tabset>
+            <tab id="tabRecordList"
+                 (selectTab)="manageTabs('L')"
+                 heading="City Management">
+                <app-city-list *ngIf="tabsList.tabRecordList" (onAdd)="manageTabs('A')"></app-city-list>
+            </tab>
+            <tab id="tabAddNew"
+                 heading="Add New"
+                 (selectTab)="manageTabs('A')">
+                 <app-city-add  *ngIf="tabsList.tabAddNew" (onSuccess)="manageTabs('L')"></app-city-add>
+            </tab>
+        </tabset>
+    </div>
+</div>

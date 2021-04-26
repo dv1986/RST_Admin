@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <div class="row">
+      <label>Name of Store Procedure</label>
+    </div>
+    <div class="row">
+      <input class="form-control" [(ngModel)]="ProcedureName" type="text" (blur)="FetchColumns($event)" />
+    </div>
+    <div *ngIf="ProcedureError!=''" class="row">
+      <label style="color:red">{{ProcedureError}}</label>
+    </div>
+  </div>
+</div>
+<div *ngIf="Parameters!=null && Parameters.length>0">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div style="margin:10px 0px 10px -15px;" class="col-md-4">
+      <label>Enter Values of Procedure Params below</label>
+    </div>
+  </div>
+
+  <div *ngFor="let parameter of (Parameters); index as i;">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div class="row">
+          <label>{{parameter.name}}</label>
+        </div>
+        <div class="row">
+          <input class="form-control" [(ngModel)]="parameter.value" type="text" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4" style="text-align:right;">
+      <button class="btn btn-sm btn-success" style="margin-top:5px;margin-right:6px;" (click)="GenerateCode('I')">Insert</button>
+      <button class="btn btn-sm btn-primary" style="margin-top:5px;margin-right:6px;" (click)="GenerateCode('U')">Update</button>
+      <button class="btn btn-sm btn-danger" style="margin-top:5px;margin-right:6px;" (click)="GenerateCode('D')">Delete</button>
+      <button class="btn btn-sm btn-info" style="margin-top:5px;margin-right:6px;" (click)="GenerateCode('G')">Generate</button>
+    </div>
+  </div>
+</div>
+  <div class="row" style="margin-top:5px" *ngIf="GeneratedCode!=null">
+    <label>Grid Column Definitions</label>
+    <pre>
+    <code>{{GeneratedCode.colDefs}}</code>
+    </pre>
+  </div>
+  <div class="row" style="margin-top:5px" *ngIf="GeneratedCode!=null">
+    <label>Model Class</label>
+    <pre>
+    <code>{{GeneratedCode.modelClass}}</code>
+    </pre>
+  </div>
+  <div class="row" style="margin-top:5px" *ngIf="GeneratedCode!=null">
+    <label>Model Class</label>
+    <pre>
+    <code>{{GeneratedCode.repoFunction}}</code>
+    </pre>
+  </div>
+  <div class="row" style="margin-top:5px" *ngIf="GeneratedCode!=null">
+    <label>Model Class</label>
+    <pre>
+    <code>{{GeneratedCode}}</code>
+    </pre>
+  </div>
+

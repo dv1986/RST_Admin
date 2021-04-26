@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-md-12">
+    <tabset #tabset>
+      <tab id="tabColorList"
+           heading="Color"
+           (selectTab)="manageTabs('CL')">
+        <app-color-list *ngIf="tabsList.tabColorList"></app-color-list>
+      </tab>
+      <tab id="tabFabricList"
+           heading="Fabric"
+           (selectTab)="manageTabs('FL')">
+        <app-fabric-list *ngIf="tabsList.tabFabricList"></app-fabric-list>
+      </tab>
+      <tab id="tabTagList"
+           heading="Tag"
+           (selectTab)="manageTabs('TL')">
+        <app-tag-list *ngIf="tabsList.tabTagList"></app-tag-list>
+      </tab>
+    </tabset>
+  </div>
+</div>

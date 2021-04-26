@@ -1,0 +1,37 @@
+
+
+<div class="row">
+    <div class="col-md-12">
+        <tabset #tabset>
+            <tab id="tabUserList" (selectTab)="manageTabs('UL')" 
+                 heading="User Management">
+                 <div class="example-wrapper" *ngIf="tabsList.tabUserList">
+                    <div class="panel panel-default panel-resizable"
+                         style="height: 500px">
+                        <div class="panel-body"
+                             style="height: 92%;">
+                            <app-ag-grid [data]="users"
+                                         [gridInfo]="gridInformation"
+                                         [selectMode]="'multiple'"
+                                         [options]="gridOptions"
+                                         [rowHeight]="25"
+                                         [keyField]="'rowId'"
+                                         [gridActions]="gridActions"
+                                         [filterComponent]="filterComponent"
+                                         (ready)="onGridReady()"
+                                         (selectionChange)="onSelectionChanged($event)"
+                                         [allowPaging]="true">
+                            </app-ag-grid>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+            <tab id="tabAddUser" heading="Add User" (selectTab)="manageTabs('AU')" >
+                <app-registration *ngIf="tabsList.tabAddUser" (onSuccess)="manageTabs('UL')"></app-registration>
+            </tab>
+            <tab id="tabUserPermission" heading="User Permission" (selectTab)="manageTabs('UP')" >
+                 <app-user-permission *ngIf="tabsList.tabUserPermission"></app-user-permission>
+            </tab>
+        </tabset>
+    </div>
+</div>

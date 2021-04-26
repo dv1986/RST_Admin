@@ -1,0 +1,22 @@
+<ng-select [items]="seoList"
+           bindLabel="metaTitle"
+           bindValue="rowId"
+           [addTag]="false"
+           [multiple]="false"
+           [typeahead]="typeahead"
+           [placeholder]="placeholder"
+           [virtualScroll]="true"
+           [selectOnTab]="true"
+           [disabled]="disabled"
+           [(ngModel)]="selectedSeo"
+           class="ng-CustomControl">
+    <ng-template ng-option-tmp
+                 let-item="item">
+        <div style="height: fit-content;">
+            <div>
+                {{item.metaTitle}}
+            </div>
+            <small><b>Meta Keyword: </b> {{item.metaKeyword}}</small>
+        </div>
+    </ng-template>
+</ng-select>

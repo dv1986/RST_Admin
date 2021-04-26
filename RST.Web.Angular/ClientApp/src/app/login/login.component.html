@@ -1,0 +1,193 @@
+<!-- <div class='container main-content'>
+
+  <div class="card">
+    <div class="card-header">
+      {{pageTitle}}
+    </div>
+
+    <div class="card-body">
+      <form class="needs-validation"
+            novalidate
+            (ngSubmit)="login(loginForm)"
+            #loginForm="ngForm"
+            autocomplete="off">
+        <fieldset>
+          <div class="form-group row">
+            <label class="col-md-4 col-form-label"
+                   for="userNameId">User Name</label>
+            <div class="col-md-12">
+              <input class="form-control"
+                     [ngClass]="{'is-invalid': (userNameVar.touched || userNameVar.dirty) && !userNameVar.valid }"
+                     id="userNameId"
+                     [type]="maskUserName ? 'password' : 'text'"
+                     placeholder="User Name (required)"
+                     required
+                     [(ngModel)]="userName"
+                     name="userName"
+                     #userNameVar="ngModel" />
+              <div class="invalid-feedback"
+                   *ngIf="(userNameVar.touched || userNameVar.dirty) && passwordVar.hasError('required')">
+                User name is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-4 col-form-label"
+                   for="passwordId">Password</label>
+            <div class="col-md-12">
+              <input class="form-control"
+                     [ngClass]="{'is-invalid': (passwordVar.touched || passwordVar.dirty) && !passwordVar.valid }"
+                     id="passwordId"
+                     type="password"
+                     placeholder="Password (required)"
+                     required
+                     [(ngModel)]="password"
+                     name="password"
+                     #passwordVar="ngModel" />
+              <div class="invalid-feedback"
+                   *ngIf="(passwordVar.touched || passwordVar.dirty) && passwordVar.hasError('required')">
+                Password is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-md-8 col-md-offset-2">
+              <span>
+                <button class="btn btn-primary"
+                        type="submit"
+                        style="width:80px;margin-right:10px"
+                        [disabled]="!loginForm.valid">
+                  Log In
+                </button>
+              </span>
+              <span>
+                <a class="btn btn-light"
+                   (click)="cancel()">
+                  Cancel
+                </a>
+              </span>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+
+    <div class="card-footer">
+      <div class="row"
+           *ngIf="errorMessage">
+        <div class="col-md-12">
+          <strong>Oh snap!</strong> {{errorMessage}}.
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<section class="material-half-bg">
+  <div class="cover"></div>
+</section>
+<section class="login-content">
+  <div class="logo">
+    <h1>Motoiz</h1>
+  </div>
+  <div class="login-box">
+    <form novalidate
+          (ngSubmit)="login(loginForm)"
+          #loginForm="ngForm"
+          autocomplete="off"
+          class="login-form">
+      <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
+      <div class="form-group">
+        <label class="control-label">USERNAME</label>
+        <!-- <input class="form-control"
+               type="text"
+               placeholder="Email"
+               autofocus> -->
+
+        <input class="form-control"
+               [ngClass]="{'is-invalid': (userNameVar.touched || userNameVar.dirty) && !userNameVar.valid }"
+               id="userNameId"
+               [type]="maskUserName ? 'password' : 'text'"
+               placeholder="User Name (required)"
+               required
+               [(ngModel)]="userName"
+               name="userName"
+               #userNameVar="ngModel" />
+        <div class="invalid-feedback"
+             *ngIf="(userNameVar.touched || userNameVar.dirty) && passwordVar.hasError('required')">
+          User name is required.
+        </div>
+
+      </div>
+      <div class="form-group">
+        <label class="control-label">PASSWORD</label>
+        <!-- <input class="form-control"
+               type="password"
+               placeholder="Password"> -->
+        <input class="form-control"
+               [ngClass]="{'is-invalid': (passwordVar.touched || passwordVar.dirty) && !passwordVar.valid }"
+               id="passwordId"
+               type="password"
+               placeholder="Password (required)"
+               required
+               [(ngModel)]="password"
+               name="password"
+               #passwordVar="ngModel" />
+        <div class="invalid-feedback"
+             *ngIf="(passwordVar.touched || passwordVar.dirty) && passwordVar.hasError('required')">
+          Password is required.
+        </div>
+      </div>
+      <!-- <div class="form-group">
+        <div class="utility">
+          <div class="animated-checkbox">
+            <label>
+              <input type="checkbox"><span class="label-text">Stay Signed in</span>
+            </label>
+          </div>
+          <p class="semibold-text mb-2"><a href="#"
+               data-toggle="flip">Forgot Password ?</a></p>
+        </div>
+      </div> -->
+      <div class="form-group btn-container">
+        <!-- <button class="btn btn-primary"
+                        type="submit"
+                        style="width:80px;margin-right:10px"
+                        [disabled]="!loginForm.valid">
+                  Log In
+                </button> -->
+        <button type="submit"
+                [disabled]="!loginForm.valid"
+                class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
+      </div>
+    </form>
+    <form class="forget-form"
+          action="index.html">
+      <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Forgot Password ?</h3>
+      <div class="form-group">
+        <label class="control-label">EMAIL</label>
+        <input class="form-control"
+               type="text"
+               placeholder="Email">
+      </div>
+      <div class="form-group btn-container">
+        <button class="btn btn-primary btn-block"><i class="fa fa-unlock fa-lg fa-fw"></i>RESET</button>
+      </div>
+      <div class="form-group mt-3">
+        <p class="semibold-text mb-0"><a href="#"
+             data-toggle="flip"><i class="fa fa-angle-left fa-fw"></i> Back to Login</a></p>
+      </div>
+    </form>
+    <div class="card-footer">
+      <div class="row"
+           *ngIf="errorMessage">
+        <div class="col-md-12">
+          <strong>Oh snap!</strong> {{errorMessage}}.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+<div class="card">
+    <div class="card-header">
+        Permission(s) to be Assign
+    </div>
+    <div class="card-body">
+        <ngx-treeview [config]="config"
+                      [items]="items"
+                      (selectedChange)="onSelectionChange($event)">
+        </ngx-treeview>
+
+        <div class="form-row bs-linebreak"
+             style="float:right">
+            <span>
+                <button class="btn btn-primary btn-sm btn-custom"
+                        type="button"
+                        (click)="onUpdatePermissions()">
+                    Update
+                </button>
+            </span>
+        </div>
+    </div>
+</div>
+

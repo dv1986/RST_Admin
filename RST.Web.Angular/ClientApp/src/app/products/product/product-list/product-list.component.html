@@ -1,0 +1,40 @@
+<div class="example-wrapper">
+  <div class="panel panel-default panel-resizable"
+       style="height: 400px">
+    <div class="panel-body"
+         style="height: 92%;">
+      <app-ag-grid [data]="dataList"
+                   [gridInfo]="gridInformation"
+                   [selectMode]="'multiple'"
+                   [options]="gridOptions"
+                   [rowHeight]="25"
+                   [keyField]="'rowId'"
+                   [gridActions]="gridActions"
+                   (ready)="onGridReady()"
+                   (selectionChange)="onSelectionChanged($event)">
+      </app-ag-grid>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <tabset #bottomtabset>
+      <tab id="tabAttributes"
+           heading="Attributes"  (selectTab)="manageTabs('A')">
+        <app-product-attribute-mapping-list *ngIf="gridInformation.selectedData.length>0">
+        </app-product-attribute-mapping-list>
+      </tab>
+      <tab id="tabColor"
+           heading="Colors"  (selectTab)="manageTabs('C')">
+        <!-- <app-product-attribute-mapping-list *ngIf="gridInformation.selectedData.length>0">
+        </app-product-attribute-mapping-list> -->
+      </tab>
+      <tab id="tabImages"
+           heading="Images"  (selectTab)="manageTabs('I')">
+        <app-product-images-mapping-list *ngIf="gridInformation.selectedData.length>0">
+        </app-product-images-mapping-list>
+      </tab>
+    </tabset>
+  </div>
+</div>

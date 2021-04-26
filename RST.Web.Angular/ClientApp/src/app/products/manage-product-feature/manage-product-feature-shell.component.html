@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-12">
+    <tabset #tabset>
+      <tab id="tabProductFeatureCategoryList"
+           heading="Product Feature Category"
+           (selectTab)="manageTabs('PFCL')">
+        <app-product-feature-category-list *ngIf="tabsList.tabProductFeatureCategoryList"></app-product-feature-category-list>
+      </tab>
+      <tab id="tabProductFeatureList"
+           heading="Product Feature"
+           (selectTab)="manageTabs('PFL')">
+        <app-product-features-list *ngIf="tabsList.tabProductFeatureList"></app-product-features-list>
+      </tab>
+    </tabset>
+  </div>
+</div>

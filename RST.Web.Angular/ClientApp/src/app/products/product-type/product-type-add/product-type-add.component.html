@@ -1,0 +1,203 @@
+<div class="card">
+    <div class="card-header">
+        {{pageTitle}}
+    </div>
+    <div class="card-body">
+        <form novalidate
+              (ngSubmit)="onSubmit()"
+              [formGroup]="form">
+            <fieldset>
+                <div class="form-row">
+
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="productCategoryId">Select Category</label>
+                        <ng-select [items]="categories"
+                                   bindLabel="catName"
+                                   bindValue="rowId"
+                                   (change)="onCategoryChange($event)"
+                                   [addTag]="false"
+                                   [ngClass]="{ 'is-invalid': submitted && f.productCategoryId.errors }"
+                                   formControlName="productCategoryId">
+                        </ng-select>
+                        <div *ngIf="submitted && f.productCategoryId.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.productCategoryId.errors.required">Category is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="productSubCategoryParentId">Select Parent Sub-Category</label>
+                        <ng-select [items]="subParentCategories"
+                                   bindLabel="catName"
+                                   (change)="onSubCategoryParentChange($event)"
+                                   bindValue="rowId"
+                                   [addTag]="false"
+                                   [ngClass]="{ 'is-invalid': submitted && f.productSubCategoryParentId.errors }"
+                                   formControlName="productSubCategoryParentId">
+                        </ng-select>
+                        <div *ngIf="submitted && f.productSubCategoryParentId.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.productSubCategoryParentId.errors.required">Parent Sub-Category is required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="productSubCategoryId">Select Sub Category</label>
+                        <ng-select [items]="subCategories"
+                                   bindLabel="subCategoryName"
+                                   bindValue="rowId"
+                                   [addTag]="false"
+                                   [ngClass]="{ 'is-invalid': submitted && f.productSubCategoryId.errors }"
+                                   formControlName="productSubCategoryId">
+                        </ng-select>
+                        <div *ngIf="submitted && f.productSubCategoryId.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.productSubCategoryId.errors.required">Sub-Category is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="name">Type Name</label>
+                        <input class="form-control form-control-sm"
+                               id="name"
+                               type="text"
+                               [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+                               maxlength="50"
+                               formControlName="name" />
+                        <div *ngIf="submitted && f.name.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.name.errors.required">Type is required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="displayOrder">Display Order</label>
+                        <input class="form-control form-control-sm"
+                               id="displayOrder"
+                               type="number"
+                               formControlName="displayOrder" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="seoContentId">Select SEO Content</label>
+                        <app-seo-lookup formControlName="seoContentId"></app-seo-lookup>
+
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="description">Description</label>
+                        <textarea class="form-control form-control-sm"
+                                  id="description"
+                                  type="text"
+                                  formControlName="description"
+                                  rows="3">
+                            </textarea>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label-sm lbl-custom"
+                               for="productSizeTypeId">Size Type</label>
+                        <ng-select [items]="sizeTypes"
+                                   bindLabel="typeName"
+                                   bindValue="rowId"
+                                   [addTag]="false"
+                                   [ngClass]="{ 'is-invalid': submitted && f.productSizeTypeId.errors }"
+                                   formControlName="productSizeTypeId">
+                        </ng-select>
+                        <div *ngIf="submitted && f.productSizeTypeId.errors"
+                             class="invalid-feedback">
+                            <div *ngIf="f.productSizeTypeId.errors.required">Size type is required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   formControlName="includeInTopMenu"
+                                   id="includeInTopMenu">
+                            <label class="col-form-label-sm lbl-custom"
+                                   for="includeInTopMenu">
+                                Include Top Menu
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   formControlName="isNew"
+                                   id="isNew">
+                            <label class="col-form-label-sm lbl-custom"
+                                   for="isNew">
+                                Is New
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   formControlName="hasDiscountApplied"
+                                   id="hasDiscountApplied">
+                            <label class="col-form-label-sm lbl-custom"
+                                   for="hasDiscountApplied">
+                                Has Discount Applied
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   formControlName="isPublished"
+                                   id="isPublished">
+                            <label class="col-form-label-sm lbl-custom"
+                                   for="isPublished">
+                                Is Published
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer"
+                     style="margin-top: 10px;">
+                    <div class="form-row"
+                         style="float:right">
+                        <span>
+                            <button class="btn btn-primary btn-sm btn-custom"
+                                    type="submit">
+                                Save
+                            </button>
+                        </span>
+                        <span>
+                            <button class="btn btn-light btn-sm btn-custom"
+                                    type="button"
+                                    (click)="onCancel()">
+                                Cancel
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
