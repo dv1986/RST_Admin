@@ -7,7 +7,7 @@ http://www.techtutorhub.com/article/Angular-2-plus-Getting-404-File-or-directory
 https://stackoverflow.com/questions/55487702/access-image-from-web-api-core-folder-from-browser
 
 
-// change 5
+// change 2
 
 //
 
